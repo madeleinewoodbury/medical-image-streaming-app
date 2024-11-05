@@ -1,9 +1,10 @@
-import WebRTCImageStream from './pages/WebRTCStream'
+// import WebRTCImageStream from './pages/WebRTCStream'
+import ImageStream from './pages/ImageStream'
 
 function App() {
 	return (
 		<main className='container mx-auto'>
-			<WebRTCImageStream />
+			<ImageStream />
 		</main>
 	)
 }
