@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 
-const ImageStream = () => {
+const Home = () => {
+	const [streaming, setStreaming] = useState(false)
 	const [pc, setPc] = useState(null)
 	const [canvasStream, setCanvasStream] = useState(null)
 	const localVideoRef = useRef(null)
@@ -109,10 +110,13 @@ const ImageStream = () => {
 		}
 
 		if (canvasStream) {
+			setStreaming(true)
 			// Add tracks from the canvas stream to the peer connection
 			canvasStream
 				.getTracks()
 				.forEach((track) => pc.addTrack(track, canvasStream))
+		} else {
+			alert('Please upload an image first')
 		}
 
 		const offer = await pc.createOffer()
@@ -121,38 +125,54 @@ const ImageStream = () => {
 	}
 
 	return (
-		<div className='text-white py-8'>
-			<h1 className='text-lg pb-4'>WebRTC Image Streaming</h1>
-			<div className='flex gap-16 justify-center mb-8'>
+		<div className='py-6 px-4 flex flex-col w-full mx-auto max-w-xl'>
+			<h1 className='text-center text-3xl mb-6 flex items-center gap-2 justify-center'>
+				Image Streamer
+			</h1>
+			<div className='flex justify-between bg-slate-200 rounded p-6 gap-4 w-full'>
 				<div className='flex flex-col gap-4'>
-					<video
-						ref={remoteVideoRef}
-						autoPlay
-						playsInline
-						muted
-						className='border-2 border-white'
-					/>
-					<p className='text-center'>Remote Stream</p>
+					<div className='relative mb-1 w-full'>
+						<input
+							type='file'
+							name='file'
+							id='file'
+							accept='image/*'
+							onChange={handleImageUpload}
+							className='hidden'
+						/>
+						<label
+							htmlFor='file'
+							className='w-full px-4 py-2 bg-amber-500 rounded-md shadow-sm focus:outline-none cursor-pointer'>
+							Choose File
+						</label>
+					</div>
+					<button
+						onClick={startStreaming}
+						className='rounded bg-blue-600 px-4 py-2 text-white'>
+						Start Streaming
+					</button>
 				</div>
-				<div className='flex flex-col gap-4'>
-					<video
-						ref={localVideoRef}
-						autoPlay
-						playsInline
-						muted
-						className='border-2 border-white'
-					/>
-					<p className='text-center'>Local Stream</p>
+				<div className='flex flex-col gap-4 w-[150px]'>
+					<video ref={localVideoRef} autoPlay playsInline muted />
 				</div>
 			</div>
-			<input type='file' accept='image/*' onChange={handleImageUpload} />
-			<button
-				onClick={startStreaming}
-				className='rounded bg-blue-600 px-4 py-2'>
-				Start Streaming
-			</button>
+			{streaming && (
+				<p className='py-4 text-green-600 text-center text-lg'>
+					Streaming image...
+				</p>
+			)}
+			<div className='flex flex-col gap-8 w-full my-8'>
+				<div className='flex flex-col gap-4'>
+					<video ref={remoteVideoRef} autoPlay playsInline muted />
+					{remoteVideoRef.current && remoteVideoRef.current.srcObject && (
+						<p className='py-4 text-green-600 text-center text-lg'>
+							Receiving image...
+						</p>
+					)}
+				</div>
+			</div>
 		</div>
 	)
 }
 
-export default ImageStream
+export default Home
