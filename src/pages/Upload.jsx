@@ -88,7 +88,7 @@ const Upload = () => {
 			{error && <p className='mt-4 text-red-500'>{error}</p>}
 			{success && <p className='mt-4 text-green-500'>{success}</p>}
 			{success && (
-				<Link to='/stream'>
+				<Link to='/'>
 					<button className='w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-4'>
 						Go to steaming
 					</button>

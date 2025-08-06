@@ -192,9 +192,11 @@ const WebRTCImageStream = () => {
 					/>
 				)}
 			</form>
-			<p className='text-lg text-gray-300 pb-4'>
-				Click the button below to start streaming images.
-			</p>
+      {!streaming && 
+			  <p className='text-lg text-gray-300 pb-4'>
+				  Click the button below to start streaming images.
+			  </p>  
+      }
 			{!streaming ? (
 				<button
 					className='bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
