@@ -1,6 +1,24 @@
-# Medical Image Streaming - Frontend Application
+# Medical Image Streaming
 
 A React-based web application for real-time streaming and segmentation of medical DICOM images using WebRTC technology. This frontend provides an intuitive interface for uploading DICOM files and applying advanced computer vision algorithms including Watershed and Active Contours (Snakes) segmentation techniques.
+
+## Table of Contents
+
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Development](#development)
+- [Backend API Integration](#backend-api-integration)
+- [Usage Guide](#usage-guide)
+- [Application Interface](#application-interface)
+- [Component Architecture](#component-architecture)
+- [Project Structure](#project-structure)
+- [Build and Deployment](#build-and-deployment)
+- [WebRTC Considerations](#webrtc-considerations)
+- [Contributing](#contributing)
+- [Related Projects](#related-projects)
+- [License](#license)
 
 ## Features
 
@@ -67,7 +85,6 @@ This frontend application integrates with the Medical Image Streaming API using 
 
 - **REST API**: Standard HTTP requests for file uploads, health checks, and stream initialization
 - **WebRTC**: Direct peer-to-peer connection for real-time video streaming of processed medical images  
-- **No Persistent Connection**: Unlike WebSocket-based solutions, this application uses stateless HTTP requests combined with WebRTC for optimal performance
 
 ### API Endpoints Used
 
